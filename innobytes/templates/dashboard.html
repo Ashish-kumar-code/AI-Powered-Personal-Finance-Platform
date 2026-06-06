@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Finance Dashboard</title>
+    <style>
+      body {
+        font-family: Arial;
+        padding: 20px;
+        background: #f0f0f0;
+      }
+      .section {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      h2 {
+        color: #333;
+      }
+      input,
+      select {
+        padding: 5px;
+        margin: 5px 0;
+        width: 100%;
+      }
+      button {
+        padding: 10px 15px;
+        margin-top: 10px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      th,
+      td {
+        border: 1px solid #aaa;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Registration Section -->
+    {% if show_register %}
+    <div class="section">
+      <h2>📝 Register</h2>
+      <form method="POST" action="/register">
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          required
+        /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        /><br />
+        <button type="submit">Register</button>
+      </form>
+    </div>
+    {% endif %}
+
+    <!-- Login Section -->
+    {% if show_login %}
+    <div class="section">
+      <h2>🔐 Login</h2>
+      <form method="POST" action="/login">
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          required
+        /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        /><br />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    {% endif %} {% if show_dashboard %}
+    <!-- Dashboard Section -->
+    <div class="section">
+      <h2>📊 Dashboard</h2>
+      <p>Welcome to your personal finance dashboard!</p>
+      <a href="/logout">Logout</a>
+    </div>
+
+    <!-- Add/View/Delete Transactions -->
+    <div class="section">
+      <h2>💸 Transactions</h2>
+      <form method="POST" action="/add_transaction">
+        <select name="type" required>
+          <option value="">Select Type</option>
+          <option value="Income">Income</option>
+          <option value="Expense">Expense</option></select
+        ><br />
+        <input
+          type="text"
+          name="category"
+          placeholder="Category"
+          required
+        /><br />
+        <input
+          type="number"
+          name="amount"
+          placeholder="Amount"
+          required
+        /><br />
+        <input type="text" name="description" placeholder="Description" /><br />
+        <button type="submit">Add Transaction</button>
+      </form>
+
+      {% if transactions %}
+      <h3>📄 Transaction History</h3>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+        {% for txn in transactions %}
+        <tr>
+          <td>{{ txn[0] }}</td>
+          <td>{{ txn[2] }}</td>
+          <td>{{ txn[3] }}</td>
+          <td>{{ txn[4] }}</td>
+          <td>{{ txn[6] }}</td>
+          <td><a href="/delete/{{ txn[0] }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+
+    <!-- Budget Section -->
+    <div class="section">
+      <h2>💰 Budget</h2>
+    <form method="POST" action="/set_budget">
+        <input type="text" name="category" placeholder="Category (e.g. Food)" required>
+         <input type="number" name="amount" placeholder="Budget Amount" required>
+         <input type="text" name="month" placeholder="Month (e.g. June)" required>
+         <input type="text" name="year" placeholder="Year (e.g. 2025)" required>
+         <button type="submit">Set Budget</button>
+    </form>
+
+
+      {% if summary %}
+      <h3>📈 Budget Summary</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Budget (₹)</th>
+            <th>Spent (₹)</th>
+            <th>Remaining/Excess</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in summary %}
+          <tr>
+            <td>{{ item.category }}</td>
+            <td>₹{{ item.budget }}</td>
+            <td>₹{{ item.spent }}</td>
+            <td>
+              {% if item.remaining < 0 %}
+              <span style="color: red"
+                >-₹{{ item.remaining | abs }} (Exceeded)</span
+              >
+              {% else %} ₹{{ item.remaining }} {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No budget summary available for this month.</p>
+      {% endif %}
+    </div>
+    {% endif %}
+  </body>
+</html>

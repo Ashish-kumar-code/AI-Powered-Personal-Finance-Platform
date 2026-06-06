@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    @apply bg-slate-900 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white;
+  }
+}
+
+/* Custom premium scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full border border-slate-900 hover:bg-slate-700;
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  @apply bg-slate-900/60 backdrop-blur-md border border-slate-800/80 shadow-xl;
+}
+
+.glass-card {
+  @apply bg-slate-900/50 backdrop-blur-sm border border-slate-800/50 hover:border-slate-700/80 transition-all duration-300 shadow-lg hover:shadow-indigo-500/5;
+}
+
+/* Custom glow borders */
+.glow-indigo {
+  @apply shadow-[0_0_15px_rgba(99,102,241,0.1)];
+}
+
+.glow-emerald {
+  @apply shadow-[0_0_15px_rgba(16,185,129,0.1)];
+}
+
+.glow-rose {
+  @apply shadow-[0_0_15px_rgba(244,63,94,0.1)];
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+.animate-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}

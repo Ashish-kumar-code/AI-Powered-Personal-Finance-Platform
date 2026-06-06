@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Personal Finance Management Application Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            line-height: 1.6;
+            color: #333;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        code {
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-size: 0.95em;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            overflow-x: auto;
+            border-radius: 6px;
+        }
+        ul {
+            margin-bottom: 20px;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Personal Finance Management Application</h1>
+
+    <div class="section">
+        <h2>Overview</h2>
+        <p>
+            This application allows users to manage their personal finances by registering, logging in, adding, viewing, and deleting transactions, generating monthly financial reports, and backing up/restoring the database.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Features</h2>
+        <ul>
+            <li>User registration and authentication</li>
+            <li>Add, view, and delete income and expense transactions</li>
+            <li>Generate monthly financial reports</li>
+            <li>Backup and restore database data</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Setup Instructions</h2>
+        <ol>
+            <li><strong>Clone the repository:</strong>
+                <pre><code>git clone https://github.com/yourusername/finance-app.git
+                    cd finance-app
+                </code></pre>
+            </li>
+            <li><strong>Install dependencies:</strong>
+                <pre><code>pip install -r requirements.txt</code></pre>
+            </li>
+            <li><strong>Initialize the database:</strong>
+                <pre><code>python init_db.py</code></pre>
+            </li>
+            <li><strong>Run the application:</strong>
+                <pre><code>python main.py</code></pre>
+            </li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Usage Guide</h2>
+        <ul>
+            <li>Register a new user</li>
+            <li>Login using your credentials</li>
+            <li>Add transactions by specifying type, category, amount, date, and description</li>
+            <li>View all transactions for your account</li>
+            <li>Generate monthly reports by selecting month and year</li>
+            <li>Backup your database to a file and restore when needed</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Function Overview</h2>
+        <h3>Authentication (auth.py)</h3>
+        <ul>
+            <li><code>register_user(username, password)</code>: Register a new user</li>
+            <li><code>login_user(username, password)</code>: Login and return user ID</li>
+        </ul>
+        <h3>Transactions (transactions.py)</h3>
+        <ul>
+            <li><code>add_transaction(user_id, type, category, amount, description, date=None)</code>: Add income/expense</li>
+            <li><code>view_transactions(user_id)</code>: View all transactions of the user</li>
+            <li><code>delete_transaction(user_id, transaction_id)</code>: Delete a specific transaction</li>
+        </ul>
+        <h3>Reports (reports.py)</h3>
+        <ul>
+            <li><code>generate_report(user_id, month, year)</code>: Generate monthly financial summary</li>
+        </ul>
+        <h3>Backup (backup.py)</h3>
+        <ul>
+            <li><code>backup_database()</code>: Backup database to a file</li>
+            <li><code>restore_database()</code>: Restore database from backup file</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Instructions</h2>
+        <p>Run unit tests to verify the application functionality:</p>
+        <pre><code>python -m unittest discover tests</code></pre>
+        <p>The tests cover:</p>
+        <ul>
+            <li>User registration and login</li>
+            <li>Transaction add/view/delete</li>
+            <li>Report generation</li>
+            <li>Database backup and restore</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Future Improvements</h2>
+        <ul>
+            <li>Add password hashing for enhanced security</li>
+            <li>Implement a graphical user interface (GUI) or web app interface</li>
+            <li>Support multiple currencies and internationalization</li>
+            <li>Export reports in PDF or Excel formats</li>
+            <li>Add budgeting and alert notifications</li>
+        </ul>
+    </div>
+
+    <footer>
+        &copy; 2025 Your Name / Your Organization
+    </footer>
+
+</body>
+</html>

@@ -1,843 +1,228 @@
 # 💰 AI-Powered Personal Finance Analytics Platform
-## Product Requirements Document (PRD), Technical Architecture & Deployment Guide
+
+An advanced, full-stack personal finance management and predictive analytics suite designed for Data Analytics and Full-Stack Engineering portfolios. The platform decouples a legacy Python CLI system into a modern **Flask JSON REST API** backend and a **Vite + React SPA** frontend styled with **Tailwind CSS** and powered by **Chart.js** visualizations.
 
 ---
 
-# 📌 Project Overview
+## 🚀 Key Features
 
-The AI-Powered Personal Finance Analytics Platform is a modern fintech application designed to help users manage, analyze, and optimize their personal finances using Data Analytics, Machine Learning, and Artificial Intelligence.
-
-Unlike traditional expense trackers, this platform provides:
-
-- Intelligent financial insights
-- Spending behavior analysis
-- Predictive expense forecasting
-- Financial health scoring
-- Budget optimization recommendations
-- Interactive analytics dashboards
-- Automated report generation
-
-The project serves as a complete Data Analytics and Full-Stack Development portfolio project demonstrating:
-
-- Python
-- Flask
-- React.js
-- SQL
-- Pandas
-- Scikit-Learn
-- Machine Learning
-- Data Visualization
-- REST API Development
-- Cloud Deployment
+* **Interactive Analytical Dashboard:** Real-time metrics dashboard featuring KPI cards, Line charts (monthly expense trends), Pie charts (category allocations), and Bar charts (budget utilization).
+* **Pandas Analytics Engine:** Leverages Pandas to calculate granular financial indices, including category expenditure totals, budget compliance margins, savings rates, and a composite **Financial Health Score** (0-100 score weighing margins and budget compliance).
+* **Daily Spending Heatmap:** A GitHub-style calendar contribution grid that dynamically colors cells based on daily transaction volumes over the last 365 days.
+* **Scikit-Learn Predictive Modeling:**
+  * **Expense Forecasting:** Fits a Linear Regression model on historical transactions to forecast expenditure trends for the next 3 months.
+  * **Goal Timeline Prediction:** Projects how many months it will take to achieve a specific savings goal based on rolling net-savings rates.
+  * **Smart Budgets Recommender:** Proposes optimized monthly budgets per category based on historical moving averages.
+* **Natural Language AI Insights:** Compares month-over-month spending behaviors to output human-readable alerts (e.g. *"Food spending increased by 15% this month due to weekend dining transactions. We recommend reducing budget by 10% next month."*).
+* **Multi-Format Reports Exporter:** Instantly compiles financial summaries into downloadable tabular **CSVs**, styled **Excel spreadsheets** (using `openpyxl`), or professionally formatted **PDF reports** (using `ReportLab`) containing graphs, tables, and AI recommendations.
+* **Clean Decoupled Architecture:** Communication over JSON REST APIs with cross-origin session support and fallback headers (`X-User-ID` or `Authorization Bearer`).
 
 ---
 
-# 🎯 Product Vision
+## 🛠️ Tech Stack
 
-Transform a traditional Personal Finance Management application into an intelligent financial assistant capable of:
+### Backend
+* **Language & Core:** Python 3.10+, Flask
+* **Data Processing & Analytics:** Pandas, NumPy
+* **Machine Learning:** Scikit-learn, Joblib
+* **Database:** SQLite3
+* **Document Exporters:** ReportLab (PDF), Openpyxl (Excel)
+* **Server Gateway:** Gunicorn (Production)
 
-- Tracking financial activities
-- Identifying spending patterns
-- Forecasting future expenses
-- Recommending optimized budgets
-- Monitoring savings goals
-- Generating actionable financial insights
-
----
-
-# 🚀 Core Features
-
-## 1. Interactive Analytics Dashboard
-
-Real-time KPI monitoring:
-
-- Total Income
-- Total Expenses
-- Net Savings
-- Financial Health Score
-
-Includes:
-
-- Trend Charts
-- Spending Distribution
-- Budget Utilization
-- Goal Tracking
+### Frontend
+* **Core & Build Tool:** React 18+, Vite, Javascript
+* **Styling & Icons:** Tailwind CSS v3, Lucide React
+* **Charts & Visualizations:** Chart.js, React-chartjs-2
+* **Deployments:** Vercel SPA rewrite config (`vercel.json`)
 
 ---
 
-## 2. Advanced Analytics Engine
-
-Built using Pandas.
-
-Provides:
-
-- Monthly spending trends
-- Category-wise analysis
-- Budget performance metrics
-- Savings rate calculations
-- Spending anomaly detection
-
----
-
-## 3. Machine Learning Forecasting
-
-Scikit-Learn powered prediction system.
-
-Capabilities:
-
-### Expense Forecasting
-Predicts future monthly expenses using historical transaction data.
-
-### Savings Prediction
-Estimates future savings growth and goal completion timelines.
-
-### Smart Budget Recommendations
-Suggests category-wise budgets based on historical patterns.
-
----
-
-## 4. AI Insights Engine
-
-Generates human-readable financial recommendations.
-
-Example outputs:
-
-> Food spending increased by 15% compared to last month.
-
-> Entertainment spending decreased by 8%.
-
-> Savings rate improved by 20%.
-
----
-
-## 5. Financial Report Generation
-
-Export formats:
-
-- PDF
-- CSV
-- Excel
-
-Includes:
-
-- Financial summaries
-- Charts
-- KPIs
-- AI recommendations
-
----
-
-## 6. Portfolio Showcase Features
-
-### Financial Health Score
-Custom algorithmic score (0-100)
-
-### Expense Heatmap
-GitHub-style spending visualization
-
-### Savings Goal Tracker
-Progress tracking toward financial goals
-
-### Investment Allocation Tracker
-Portfolio allocation monitoring
-
----
-
-# 👤 User Stories
-
-## US-1: Authentication
-
-As a user,
-
-I want secure registration and login functionality
-
-so that my financial information remains private.
-
----
-
-## US-2: Transaction Management
-
-As a user,
-
-I want to add, edit, categorize, and delete transactions
-
-so that my financial records stay accurate.
-
----
-
-## US-3: Dashboard Analytics
-
-As a user,
-
-I want visual charts and KPIs
-
-so that I can understand my financial behavior quickly.
-
----
-
-## US-4: AI Recommendations
-
-As a user,
-
-I want personalized financial insights
-
-so that I can improve my spending habits.
-
----
-
-## US-5: Budget Suggestions
-
-As a user,
-
-I want intelligent budget recommendations
-
-so that I can save more effectively.
-
----
-
-## US-6: Forecasting
-
-As a user,
-
-I want future expense predictions
-
-so that I can plan ahead.
-
----
-
-## US-7: Report Exports
-
-As a user,
-
-I want downloadable reports
-
-so that I can analyze my finances offline.
-
----
-
-## US-8: Financial Health Monitoring
-
-As a user,
-
-I want a financial score and heatmap
-
-so that I can track my progress consistently.
-
----
-
-# 🖥 Dashboard Architecture
-
-## Sidebar Navigation
-
-- Dashboard
-- Transactions
-- Budgets
-- Goals
-- Investments
-- Reports
-- Logout
-
----
-
-## Header Section
-
-- Search Bar
-- Notifications
-- User Profile
-
----
-
-## KPI Cards
-
-### Total Income
-Displays monthly earnings.
-
-### Total Expenses
-Displays monthly spending.
-
-### Net Savings
-Displays income minus expenses.
-
-### Financial Health Score
-Displays overall financial wellness score.
-
----
-
-## Analytics Components
-
-### Line Chart
-Income vs Expense Trend
-
-### Bar Chart
-Budget vs Actual Spending
-
-### Pie Chart
-Category-wise Expense Distribution
-
-### AI Insights Panel
-Personalized recommendations
-
-### Expense Heatmap
-365-day spending activity tracker
-
-### Goal Progress Cards
-Savings goal completion status
-
----
-
-# 📊 Analytics Engine Design
-
-## Monthly Expense Trend
-
-Tracks spending over time.
-
----
-
-## Category Breakdown
-
-Computes category-wise spending percentages.
-
----
-
-## Budget Utilization
-
-Formula:
-
-Spent ÷ Budget × 100
-
-Example:
-
-Budget = ₹10,000
-
-Spent = ₹7,500
-
-Utilization = 75%
-
----
-
-## Savings Rate
-
-Formula:
-
-(Income − Expense) ÷ Income × 100
-
-Example:
-
-Income = ₹50,000
-
-Expense = ₹35,000
-
-Savings Rate = 30%
-
----
-
-## Additional Metrics
-
-- Average Monthly Spending
-- Maximum Spending Spike
-- Top Expense Categories
-- Savings Growth Rate
-
----
-
-# 🤖 Machine Learning Module
-
-## Technologies
-
-- Scikit-Learn
-- Pandas
-- NumPy
-
----
-
-## Expense Prediction
-
-Models:
-
-- Linear Regression
-- Random Forest Regressor
-
-Output:
-
-- Next Month Expense
-- Next Quarter Expense
-
----
-
-## Savings Forecast
-
-Predicts:
-
-- Savings Growth
-- Goal Completion Dates
-
----
-
-## Smart Budget Recommendation
-
-Uses:
-
-- Rolling Average Spending
-- Savings Targets
-- Historical Trends
-
----
-
-# 🧠 AI Insights Engine
-
-Analyzes:
-
-- Spending Changes
-- Budget Deviations
-- Savings Improvements
-- Financial Anomalies
-
-Sample Insight:
+## 📐 System Architecture
 
 ```text
-Food spending increased by 15%.
-
-You exceeded your monthly food budget by ₹1,250.
-
-Consider reducing dining expenses next month.
++-----------------------+      JSON REST APIs      +------------------------+
+|  Vite + React Client  | <======================> |    Flask Web Server    |
+|   (Vercel SPA Node)   |   CORS / Auth Headers    |   (Render Container)   |
++-----------------------+                          +------------------------+
+       |                                                      ||
+       |-- Sidebar Router                                     |-- auth.py
+       |-- KPICard Rows                                       |-- transactions.py & budget.py
+       |-- Chart.js Canvas (Line/Bar/Pie)                      |-- analytics_service.py (Pandas)
+       |-- Github-style Heatmap Grid                          |-- ml_module.py (Scikit-Learn)
+       |-- AI Insights Card                                   |-- insights_service.py (MoM Variance)
+       |-- Exporter Forms                                     |-- reports_service.py (PDF/XLSX/CSV)
+                                                              ||
+                                                   +------------------------+
+                                                   |     SQLite Database    |
+                                                   |      (finance.db)      |
+                                                   +------------------------+
 ```
 
 ---
 
-# 🗄 Database Architecture
-
-## Entity Relationship Diagram
-
-```mermaid
-erDiagram
-    USERS ||--o{ TRANSACTIONS : logs
-    USERS ||--o{ BUDGETS : defines
-    USERS ||--o{ GOALS : tracks
-    USERS ||--o{ REPORTS : generates
-    USERS ||--o{ PREDICTIONS : forecasts
-    USERS ||--o{ INSIGHTS : receives
-    USERS ||--o{ NOTIFICATIONS : reads
-```
-
----
-
-## Core Tables
-
-### USERS
-
-| Field | Type |
-|---------|---------|
-| id | Integer |
-| username | String |
-| password | String |
-
----
-
-### TRANSACTIONS
-
-| Field | Type |
-|---------|---------|
-| id | Integer |
-| user_id | FK |
-| type | String |
-| category | String |
-| amount | Real |
-| date | String |
-| description | String |
-
----
-
-### BUDGETS
-
-| Field | Type |
-|---------|---------|
-| id | Integer |
-| user_id | FK |
-| category | String |
-| amount | Real |
-| month | Integer |
-| year | Integer |
-
----
-
-### GOALS
-
-Stores savings goals and progress.
-
----
-
-### REPORTS
-
-Stores generated financial reports.
-
----
-
-### PREDICTIONS
-
-Stores machine learning predictions.
-
----
-
-### INSIGHTS
-
-Stores AI-generated recommendations.
-
----
-
-### NOTIFICATIONS
-
-Stores alerts and reminders.
-
----
-
-# 🔌 REST API Architecture
-
-## Authentication APIs
-
-### Register
-
-```http
-POST /api/auth/register
-```
-
-### Login
-
-```http
-POST /api/auth/login
-```
-
-### Logout
-
-```http
-POST /api/auth/logout
-```
-
----
-
-## Transaction APIs
-
-```http
-GET    /api/transactions
-POST   /api/transactions
-DELETE /api/transactions/{id}
-```
-
----
-
-## Budget APIs
-
-```http
-GET  /api/budgets
-POST /api/budgets
-GET  /api/budgets/summary
-```
-
----
-
-## Goal APIs
-
-```http
-GET    /api/goals
-POST   /api/goals
-PUT    /api/goals/{id}
-DELETE /api/goals/{id}
-```
-
----
-
-## Analytics APIs
-
-```http
-GET /api/analytics
-GET /api/predictions
-GET /api/insights
-```
-
----
-
-## Report APIs
-
-```http
-GET  /api/reports
-POST /api/reports/generate
-GET  /api/reports/download/{id}
-```
-
----
-
-# 🎨 Frontend Technology Stack
-
-## Framework
-
-React.js (Vite)
-
----
-
-## Styling
-
-- Tailwind CSS
-- Responsive Layouts
-- Dark/Light Theme
-
----
-
-## Data Visualization
-
-- Chart.js
-- Recharts
-
-Charts:
-
-- Line Charts
-- Pie Charts
-- Bar Charts
-- KPI Cards
-- Heatmaps
-
----
-
-# 🏗 Project Structure
+## 📁 Repository Directory Structure
 
 ```text
-finance-analytics-platform/
+FINANCE/
+├── DEPLOYMENT_GUIDE.md          # Guide for Render/Vercel setups
+├── PROJECT_ROADMAP.md           # Product Requirements (PRD) & logical designs
+├── README.md                    # Main developer documentation (This file)
+├── finance.db                   # SQLite database (Root instance)
 │
-├── backend/
-│   ├── app.py
-│   ├── analytics_service.py
-│   ├── insights_service.py
-│   ├── ml_module.py
-│   ├── reports_service.py
-│   ├── models/
-│   └── requirements.txt
+├── innobytes/                   # Backend Python Application
+│   ├── app.py                   # REST API routes and Flask entry point
+│   ├── auth.py                  # Core user authentication services
+│   ├── transactions.py          # Legacy transaction database operations
+│   ├── budget.py                # Legacy budget database operations
+│   ├── database.py              # SQLite schema initializations
+│   ├── migrate_db.py            # Migration script adding upgraded tables
+│   ├── analytics_service.py     # Pandas engine & Financial Health Score
+│   ├── ml_module.py             # Scikit-learn regressors & predictive services
+│   ├── insights_service.py      # AI natural language feedback compiler
+│   ├── reports_service.py       # Exporter utility (PDF, Excel, CSV)
+│   ├── main.py                  # Legacy Command Line Interface (CLI)
+│   │
+│   ├── models/                  # Joblib serialized ML models (.joblib)
+│   ├── generated_reports/       # Directory caching exported files
+│   ├── templates/               # Legacy Jinja2 fallback HTML pages
+│   ├── backups/                 # Database backups directory
+│   │
+│   ├── requirements.txt         # Declared python dependencies
+│   ├── Dockerfile               # Container build settings for Render
+│   └── tests/                   # Python unittest suites
+│       ├── test_all.py          # Core database & CRUD tests
+│       └── test_analytics.py    # Idempotent analytics & ML engine tests
 │
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── vercel.json
-│
-├── database/
-│   └── finance.db
-│
-└── docs/
-    └── README.md
+└── frontend/                    # Frontend React Single Page App
+    ├── package.json             # Declared NPM dependencies
+    ├── vite.config.js           # Vite server settings
+    ├── tailwind.config.js       # Tailwind content content-scanning
+    ├── postcss.config.js        # PostCSS configs
+    ├── vercel.json              # Vercel SPA redirects
+    ├── index.html               # Main index wrapper (contains SEO tags)
+    │
+    └── src/
+        ├── main.jsx             # React DOM entry point
+        ├── index.css            # Base styles + glassmorphism tokens
+        ├── App.jsx              # Router & session controller
+        │
+        ├── components/          # Reusable UI widgets
+        │   ├── Sidebar.jsx      # Navigation links
+        │   ├── KPICard.jsx      # Individual summary cards
+        │   ├── Charts.jsx       # ChartJS Line, Pie, and Bar graphs
+        │   ├── ExpenseHeatmap.jsx # Contribution calendar activity grid
+        │   └── AIInsightsPanel.jsx # AI recommendations lists
+        │
+        └── pages/               # Primary page routes
+            ├── Auth.jsx         # Signin & Signup
+            ├── Dashboard.jsx    # Master dashboard grid
+            ├── Transactions.jsx # Ledger additions & histories
+            ├── Budgets.jsx      # Set bounds & utilization indicators
+            ├── Goals.jsx        # Savings targets & ML timeline forecasts
+            ├── Investments.jsx  # Net worth asset allocators
+            └── Reports.jsx      # Exporter options & download triggers
 ```
 
 ---
 
-# ☁ Deployment Architecture
+## 🗄️ Database Upgraded Schema
 
-```text
-User Browser
-      │
-      ▼
-React Frontend (Vercel)
-      │
- REST API
-      │
-      ▼
-Flask Backend (Render)
-      │
-      ▼
-SQLite / PostgreSQL
-```
+SQLite tables defined inside `database.py`:
+
+* **`users`:** `id (PK)`, `username (UNIQUE)`, `password (SHA-256)`
+* **`transactions`:** `id (PK)`, `user_id (FK)`, `type (Income/Expense)`, `category`, `amount`, `date`, `description`
+* **`budgets`:** `id (PK)`, `user_id (FK)`, `category`, `amount`, `month`, `year`
+* **`goals`:** `id (PK)`, `user_id (FK)`, `name`, `target_amount`, `current_amount`, `target_date`, `category`, `status (active/completed)`
+* **`reports`:** `id (PK)`, `user_id (FK)`, `report_type`, `month`, `year`, `total_income`, `total_expense`, `net_savings`, `file_path`, `created_at`
+* **`predictions`:** `id (PK)`, `user_id (FK)`, `prediction_type`, `target_month`, `target_year`, `predicted_amount`, `created_at`
+* **`insights`:** `id (PK)`, `user_id (FK)`, `category`, `title`, `content`, `created_at`
+* **`notifications`:** `id (PK)`, `user_id (FK)`, `title`, `message`, `is_read`, `created_at`
 
 ---
 
-# 🚀 Backend Deployment (Render)
+## 🔌 REST API JSON Endpoints
 
-## Docker Deployment (Recommended)
+| Method | Endpoint | Description | Headers / Query Params | Request Body |
+|---|---|---|---|---|
+| **POST** | `/api/auth/register` | Register a new user | | `{username, password}` |
+| **POST** | `/api/auth/login` | Secure authentication | | `{username, password}` |
+| **POST** | `/api/auth/logout` | Clear user session cookies | | |
+| **GET** | `/api/transactions` | Fetch user transaction registry | `X-User-ID` | |
+| **POST** | `/api/transactions` | Add a new ledger entry | `X-User-ID` | `{type, category, amount, date, description}` |
+| **DELETE**| `/api/transactions/<id>` | Delete transaction | `X-User-ID` | |
+| **GET** | `/api/budgets` | Fetch active budget margins | `X-User-ID` | |
+| **POST** | `/api/budgets` | Set category monthly limits | `X-User-ID` | `{category, amount, month, year}` |
+| **GET** | `/api/budgets/summary`| Fetch spent vs budget progress | `X-User-ID`, `?month=X&year=Y` | |
+| **GET** | `/api/goals` | Fetch active savings targets | `X-User-ID` | |
+| **POST** | `/api/goals` | Initialize a new savings goal | `X-User-ID` | `{name, target_amount, current_amount, target_date, category}` |
+| **PUT** | `/api/goals/<id>` | Update goal savings balance | `X-User-ID` | `{current_amount, status}` |
+| **DELETE**| `/api/goals/<id>` | Delete savings goal | `X-User-ID` | |
+| **GET** | `/api/analytics` | Fetch Pandas analytics overview | `X-User-ID`, `?month=X&year=Y` | |
+| **GET** | `/api/predictions` | Fetch ML predictions and budget recommendations | `X-User-ID`, `?goal_id=X` | |
+| **GET** | `/api/insights` | Fetch AI natural language comments | `X-User-ID` | |
+| **GET** | `/api/notifications` | Fetch system budget warning alerts | `X-User-ID` | |
+| **PUT** | `/api/notifications/<id>`| Mark alert notification as read | `X-User-ID` | |
+| **GET** | `/api/reports` | List generated statements history | `X-User-ID` | |
+| **POST** | `/api/reports/generate`| Compile a new spreadsheet/PDF | `X-User-ID` | `{report_type, month, year, format}` |
+| **GET** | `/api/reports/download` | Trigger statement file download stream | `X-User-ID`, `?format=pdf&month=X&year=Y` | |
 
-### Render Configuration
+---
 
-```yaml
-Service Name:
-finance-backend
+## ⚙️ Installation & Local Setup
 
-Root Directory:
-innobytes
+### Prerequisites
+* Python 3.10 or higher
+* Node.js 18 or higher (with npm)
 
-Runtime:
-Docker
-```
+### Step 1: Set up the Python Backend
+1. Navigate to the backend folder:
+   ```bash
+   cd innobytes
+   ```
+2. Install the required libraries:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run database migrations to create the upgraded schema:
+   ```bash
+   python migrate_db.py
+   ```
+4. Run the Flask application server:
+   ```bash
+   python app.py
+   ```
+   *The backend will boot up at `http://localhost:5000`.*
 
-Render automatically detects:
+### Step 2: Set up the React Frontend
+1. Open a new terminal window and navigate to the frontend folder:
+   ```bash
+   cd frontend
+   ```
+2. Install the required Node dependencies:
+   ```bash
+   npm install
+   ```
+3. Boot up the Vite dev server:
+   ```bash
+   npm run dev
+   ```
+   *The frontend will run at `http://localhost:5173`.*
+4. Open the link in a browser, register an account, and begin logging entries!
 
-```dockerfile
-Dockerfile
-```
+---
 
-and launches the application using:
+## 🧪 Testing and Validation
 
+### Running Backend Unittests
+Execute the Python test runner from the `innobytes` directory to verify auth, database CRUD, backups, Pandas analytics, and Scikit-learn services:
 ```bash
-gunicorn app:app
+python -m unittest discover tests
 ```
 
----
-
-## Environment Variables
-
-| Variable | Value |
-|------------|------------|
-| FLASK_APP | app.py |
-| SECRET_KEY | Secure Random String |
-| PYTHONUNBUFFERED | 1 |
-
----
-
-# 🌐 Frontend Deployment (Vercel)
-
-## Configuration
-
-```yaml
-Framework:
-Vite
-
-Root Directory:
-frontend
-
-Build Command:
+### Running Frontend Verification Build
+Verify that the React code compiles to optimized static assets without warnings or errors:
+```bash
+cd frontend
 npm run build
-
-Output Directory:
-dist
 ```
-
----
-
-## Environment Variables
-
-```env
-VITE_API_BASE=https://your-backend-url.onrender.com/api
-```
-
----
-
-## SPA Routing
-
-Create:
-
-```json
-frontend/vercel.json
-```
-
-```json
-{
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
-}
-```
-
-This prevents:
-
-```text
-404 Not Found
-```
-
-when refreshing React routes.
-
----
-
-# 📈 Development Roadmap
-
-## Phase 1
-Database Upgrade & CLI Enhancements
-✅ Completed
-
----
-
-## Phase 2
-Analytics & Machine Learning Engine
-✅ Completed
-
----
-
-## Phase 3
-REST API Development
-✅ Completed
-
----
-
-## Phase 4
-React Frontend Dashboard
-🚧 In Progress
-
-Tasks:
-
-- Sidebar Navigation
-- Dashboard UI
-- Charts
-- Goal Tracking
-- Heatmap
-
----
-
-## Phase 5
-Deployment & Testing
-⏳ Pending
-
-Tasks:
-
-- Integration Testing
-- Dockerization
-- Render Deployment
-- Vercel Deployment
-- CI/CD Pipeline
-
----
-
-# 🏆 Resume Impact
-
-### Skills Demonstrated
-
-- Python
-- Flask
-- React.js
-- SQL
-- Pandas
-- NumPy
-- Scikit-Learn
-- REST APIs
-- Machine Learning
-- Data Analytics
-- Data Visualization
-- Cloud Deployment
-- Docker
-- GitHub Actions
-- Financial Analytics
-
----
-
-# 📌 Expected Outcomes
-
-After implementation, the platform will function as:
-
-✔ Personal Finance Manager
-
-✔ Analytics Dashboard
-
-✔ AI Financial Advisor
-
-✔ Expense Prediction System
-
-✔ Budget Recommendation Engine
-
-✔ Goal Tracking Platform
-
-✔ Report Generation System
-
-✔ End-to-End Full Stack Data Analytics Project
-
----
-
-## Author
-
-Ashish Kumar
-
-B.Tech CSE | Data Analytics Enthusiast | Full Stack Developer
-
-2026 Portfolio Project
+The compiled files are generated in `frontend/dist/`.

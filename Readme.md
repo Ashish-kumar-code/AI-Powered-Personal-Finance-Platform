@@ -225,4 +225,8 @@ Verify that the React code compiles to optimized static assets without warnings 
 cd frontend
 npm run build
 ```
+<<<<<<< HEAD
 The compiled files are generated in `frontend/dist/`.
+=======
+The compiled files are generated in `frontend/dist/`.
+>>>>>>> 1496111 (chore: repo cleanup - add .gitignore/.dockerignore and untrack local artifacts)

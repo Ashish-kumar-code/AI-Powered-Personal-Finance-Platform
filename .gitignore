@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+.env
+*.sqlite3
+*.db
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+frontend/node_modules/
+
+# Frontend build
+dist/
+frontend/dist/
+
+# Logs
+*.log
+
+# Model artifacts
+*.joblib
+*.pkl
+
+# Backups
+innobytes/backups/

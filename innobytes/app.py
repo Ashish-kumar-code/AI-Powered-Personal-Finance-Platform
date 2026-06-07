@@ -17,7 +17,8 @@ from insights_service import generate_ai_insights
 from reports_service import generate_pdf_report, generate_excel_report, generate_csv_report
 
 app = Flask(__name__)
-app.secret_key = "change_this_secret_key"
+# Use environment variable for secret key in production
+app.secret_key = os.environ.get("SECRET_KEY", "change_this_secret_key")
 
 # Enable CORS for frontend integration
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
